@@ -75,19 +75,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val listNotContains = ArrayList<String>()
         val mapPosition = HashMap<Int, Char>()
 
-        val containsText = etContains.text.trim()
-        if (!containsText.isEmpty()) {
-            val split = containsText.split(" ")
-            for (letter in split) {
-                listContains.add(letter)
+        val containsText = etContains.text
+        for (letter in containsText) {
+            val c = letter.toString().trim()
+            if (c.isNotEmpty()) {
+                listContains.add(c)
             }
         }
 
-        val notContainsText = etNotContains.text.trim()
-        if (!notContainsText.isEmpty()) {
-            val split = notContainsText.split(" ")
-            for (letter in split) {
-                listNotContains.add(letter)
+        val notContainsText = etNotContains.text
+        for (letter in notContainsText) {
+            val c = letter.toString().trim()
+            if (c.isNotEmpty()) {
+                listNotContains.add(c)
             }
         }
 
@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         GlobalScope.launch {
             val filteredWords =
-                wordRepository.applyFilter(listContains, listNotContains, mapPosition)
+                wordRepository.applyFilterOnline(listContains, listNotContains, mapPosition)
 
             MainScope().launch {
                 updateWordsList(filteredWords)

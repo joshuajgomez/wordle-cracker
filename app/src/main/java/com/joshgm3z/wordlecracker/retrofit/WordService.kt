@@ -10,6 +10,9 @@ interface WordService {
 
     // URL : "api.datamuse.com/words?sp=[a-zA-Z]{5}"
 
-    @GET("words?sp=[a-zA-Z]{5}")
-    fun getAllWords(): Call<List<Word>>
+    @GET("words")
+    fun getWords(
+        @Query("sp") regex: String,
+        @Query("max") max: Int,
+    ): Call<List<Word>>
 }
